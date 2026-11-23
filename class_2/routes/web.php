@@ -15,7 +15,17 @@ Route::get("uzair/{id}/{name}" ,function($id , $name){
 });
 
 Route::post("/submit" , function(Request $request){
-    $name = $request -> input("name");
 
-    return "welcome " .$name;
+    $valid_data = $request->validate([
+        'name' => 'required|min:3|max:20',
+        'pass' => 'required|min:8|max:20'
+
+    ]);
+
+    $name = $valid_data['name'];
+    $pass = $valid_data['pass'];
+
+    // $name = $request -> input("name");
+
+    return "welcome " .$name . $pass;
 });
